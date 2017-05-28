@@ -57,10 +57,10 @@
             <br>
             <h1>
                 <span data-bind="text: stance()"></span>
-                <!--ko if: rotation() != 0-->
+                <!--ko if: showRotation()-->
                 <span data-bind="text:direction()"></span>  
                 <!--/ko-->
-                <!--ko if: rotation() != 0-->
+                <!--ko if: showRotation()-->
                 <span data-bind="text: rotation()"></span>   
                 <!--/ko-->
                 <span data-bind="text: flipTrick()"></span></h4>
@@ -167,10 +167,16 @@
             self.rotation = ko.observable(rotation[Math.floor(Math.random()*rotation.length)]);
             self.direction = ko.observable(direction[Math.floor(Math.random()*direction.length)]);
             self.flipTrick = ko.observable(fliptricks[Math.floor(Math.random()*fliptricks.length)]);
-            
+            self.showRotation = ko.observable(self.rotation != null);
+
+
             self.generate = function (){
                 
                 self.stance(stance[Math.floor(Math.random()*stance.length)]);
+                
+                if (self.rotation() == null){
+                    self.showRotation(false);
+                }
                 self.rotation(rotation[Math.floor(Math.random()*rotation.length)]);
                 self.direction(direction[Math.floor(Math.random()*direction.length)]);
                 self.flipTrick(fliptricks[Math.floor(Math.random()*fliptricks.length)]);
