@@ -33,53 +33,53 @@
 
 <body>
 
-    <header id="top" class="header">
+    <div  class="header">
         <div class="text-vertical-center">
-            <a href="www.recursethreads.com"><h1><img src="img/recurse-rectangle-black-small.png" style="width:50%;"></h1></a>
-            <h3>Trick Generator</h3>
+            <a href="www.recursethreads.com">
+                <h1><img src="img/recurse-rectangle-black-small.png" style="width:40%;"></h1>
+            </a>
+            <h2>Trick Generator</h2>
             <br>
-            <h1>
-                <span data-bind="text: stance()"></span>
-                <!--ko if: showRotation()-->
-                <span data-bind="text:direction()"></span>
-                <!--/ko-->
-                <!--ko if: showRotation()-->
-                <span data-bind="text: rotation()"></span>
-                <!--/ko-->
-                <span data-bind="text: flipTrick()"></span></h4>
+
+            <div class="row" style="margin-bottom:35px;">
+                <h2>
+                    <span data-bind="text: stance()"></span>
+                    <!--ko if: showRotation()-->
+                    <span data-bind="text:direction()"></span>
+                    <!--/ko-->
+                    <!--ko if: showRotation()-->
+                    <span data-bind="text: rotation()"></span>
+                    <!--/ko-->
+                    <span data-bind="text: flipTrick()"></span>
+                </h2>
+
                 <div class="row">
-                    <a class="btn btn-dark btn-lg" data-bind="click: generate()">Roll the Dice</a>
+                    <h1><a class="btn btn-dark btn-lg" data-bind="click: generate()">Roll the Dice</a></h1>
                 </div>
 
-        </div>
-    </header>
-
-
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-10 col-lg-offset-1 text-center">
-
-                    <ul class="list-inline">
-                        <li>
-                            <a href="http://www.recursethreads.com"><i class="fa fa-globe fa-fw fa-3x"></i></a>
-                        </li>
-                        <li>
-                            <a href="http://www.instagram.com/recursethreads"><i class="fa fa-instagram fa-fw fa-3x"></i></a>
-                        </li>
-                        <li>
-                            <a href="http://www.facebook.com/recursethreads"><i class="fa fa-facebook fa-fw fa-3x"></i></a>
-                        </li>
-                    </ul>
-                    <hr class="small">
-                    <a href="http://www.recursethreads.com"><img src="img/recurse-rectangle-black-small.png" style="width:20%;"></a>
-                </div>
             </div>
+
+            <div class="row">
+                <ul class="list-inline">
+                    <li>
+                        <a href="http://www.recursethreads.com"><i class="fa fa-globe fa-fw fa-3x" style="color:black !important"></i></a>
+                    </li>
+                    <li>
+                        <a href="http://www.instagram.com/recursethreads"><i class="fa fa-instagram fa-fw fa-3x" style="color:black !important"></i></a>
+                    </li>
+                    <li>
+                        <a href="http://www.facebook.com/recursethreads"><i class="fa fa-facebook fa-fw fa-3x" style="color:black !important"></i></a>
+                    </li>
+                </ul>
+            </div>
+
+
         </div>
-        <a id="to-top" href="#top" class="btn btn-dark btn-lg"><i class="fa fa-chevron-up fa-fw fa-1x"></i></a>
-    </footer>
+    </div>
+
+
+
+   
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
@@ -91,8 +91,6 @@
 
     <!-- Custom Theme JavaScript -->
     <script>
-        
-
         var fliptricks = ["heelfip", "kickflip", "varial flip", "varial heelflip", "hardflip", "inward heelflip", "360 flip"];
         var stance = ["regular", "switch", "nollie", "fakie"];
         var rotation = [null, 180, 180, 180, 180, null, null, null, 360];
