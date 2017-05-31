@@ -93,7 +93,7 @@
     <script>
         var fliptricks = ["heelfip", "kickflip", "varial flip", "varial heelflip", "hardflip", "inward heelflip", "360 flip"];
         var stance = ["regular", "switch", "nollie", "fakie"];
-        var rotation = [null, 180, 180, 180, 180, null, null, null, 360];
+        var rotation = [null, 180, 180, 180, 180, null, 360];
         var direction = ["fs", "bs"];
 
         function AppViewModel() {
@@ -108,11 +108,14 @@
             self.generate = function () {
 
                 self.stance(stance[Math.floor(Math.random() * stance.length)]);
-
+                self.rotation(rotation[Math.floor(Math.random() * rotation.length)]);
+                
                 if (self.rotation() == null) {
                     self.showRotation(false);
+                } else {
+                    self.showRotation(true);
                 }
-                self.rotation(rotation[Math.floor(Math.random() * rotation.length)]);
+                
                 self.direction(direction[Math.floor(Math.random() * direction.length)]);
                 self.flipTrick(fliptricks[Math.floor(Math.random() * fliptricks.length)]);
 
