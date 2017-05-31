@@ -33,38 +33,24 @@
 
 <body>
 
-    <!-- Navigation -->
-    <a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
-    <nav id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
-            <li class="sidebar-brand">
-                <a href="#top" onclick=$( "#menu-close").click();>Recurse Threads</a>
-            </li>
-            <li>
-                <a href="#top" onclick=$( "#menu-close").click();>Home</a>
-            </li>
-         
-
-        </ul>
-    </nav>
-
-    <!-- Header -->
     <header id="top" class="header">
         <div class="text-vertical-center">
-            <h1><img src="img/recurse-rectangle-black-small.png" style="width:50%;"></h1>
+            <a href="www.recursethreads.com"><h1><img src="img/recurse-rectangle-black-small.png" style="width:50%;"></h1></a>
             <h3>Trick Generator</h3>
             <br>
             <h1>
                 <span data-bind="text: stance()"></span>
                 <!--ko if: showRotation()-->
-                <span data-bind="text:direction()"></span>  
+                <span data-bind="text:direction()"></span>
                 <!--/ko-->
                 <!--ko if: showRotation()-->
-                <span data-bind="text: rotation()"></span>   
+                <span data-bind="text: rotation()"></span>
                 <!--/ko-->
                 <span data-bind="text: flipTrick()"></span></h4>
-            <a class="btn btn-dark btn-lg" data-bind="click: generate()">Roll the Dice</a>
+                <div class="row">
+                    <a class="btn btn-dark btn-lg" data-bind="click: generate()">Roll the Dice</a>
+                </div>
+
         </div>
     </header>
 
@@ -75,8 +61,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 text-center">
-                   
-                    <ul class="list-inline">                        
+
+                    <ul class="list-inline">
                         <li>
                             <a href="http://www.recursethreads.com"><i class="fa fa-globe fa-fw fa-3x"></i></a>
                         </li>
@@ -105,82 +91,33 @@
 
     <!-- Custom Theme JavaScript -->
     <script>
-        // Closes the sidebar menu
-        $("#menu-close").click(function (e) {
-            e.preventDefault();
-            $("#sidebar-wrapper").toggleClass("active");
-        });
-        // Opens the sidebar menu
-        $("#menu-toggle").click(function (e) {
-            e.preventDefault();
-            $("#sidebar-wrapper").toggleClass("active");
-        });
-        // Scrolls to the selected menu item on the page
-        $(function () {
-            $('a[href*=#]:not([href=#],[data-toggle],[data-target],[data-slide])').click(function () {
-                if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
-                    var target = $(this.hash);
-                    target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-                    if (target.length) {
-                        $('html,body').animate({
-                            scrollTop: target.offset().top
-                        }, 1000);
-                        return false;
-                    }
-                }
-            });
-        });
-        //#to-top button appears after scrolling
-        var fixed = false;
-        $(document).scroll(function () {
-            if ($(this).scrollTop() > 250) {
-                if (!fixed) {
-                    fixed = true;
-                    // $('#to-top').css({position:'fixed', display:'block'});
-                    $('#to-top').show("slow", function () {
-                        $('#to-top').css({
-                            position: 'fixed',
-                            display: 'block'
-                        });
-                    });
-                }
-            } else {
-                if (fixed) {
-                    fixed = false;
-                    $('#to-top').hide("slow", function () {
-                        $('#to-top').css({
-                            display: 'none'
-                        });
-                    });
-                }
-            }
-        });
+        
 
         var fliptricks = ["heelfip", "kickflip", "varial flip", "varial heelflip", "hardflip", "inward heelflip", "360 flip"];
         var stance = ["regular", "switch", "nollie", "fakie"];
-        var rotation = [null,180, 180, 180, 180, null, null, null, 360];
+        var rotation = [null, 180, 180, 180, 180, null, null, null, 360];
         var direction = ["fs", "bs"];
 
         function AppViewModel() {
             var self = this;
-            self.stance = ko.observable(stance[Math.floor(Math.random()*stance.length)]);
-            self.rotation = ko.observable(rotation[Math.floor(Math.random()*rotation.length)]);
-            self.direction = ko.observable(direction[Math.floor(Math.random()*direction.length)]);
-            self.flipTrick = ko.observable(fliptricks[Math.floor(Math.random()*fliptricks.length)]);
+            self.stance = ko.observable(stance[Math.floor(Math.random() * stance.length)]);
+            self.rotation = ko.observable(rotation[Math.floor(Math.random() * rotation.length)]);
+            self.direction = ko.observable(direction[Math.floor(Math.random() * direction.length)]);
+            self.flipTrick = ko.observable(fliptricks[Math.floor(Math.random() * fliptricks.length)]);
             self.showRotation = ko.observable(self.rotation != null);
 
 
-            self.generate = function (){
-                
-                self.stance(stance[Math.floor(Math.random()*stance.length)]);
-                
-                if (self.rotation() == null){
+            self.generate = function () {
+
+                self.stance(stance[Math.floor(Math.random() * stance.length)]);
+
+                if (self.rotation() == null) {
                     self.showRotation(false);
                 }
-                self.rotation(rotation[Math.floor(Math.random()*rotation.length)]);
-                self.direction(direction[Math.floor(Math.random()*direction.length)]);
-                self.flipTrick(fliptricks[Math.floor(Math.random()*fliptricks.length)]);
-                 
+                self.rotation(rotation[Math.floor(Math.random() * rotation.length)]);
+                self.direction(direction[Math.floor(Math.random() * direction.length)]);
+                self.flipTrick(fliptricks[Math.floor(Math.random() * fliptricks.length)]);
+
             }
         }
 
