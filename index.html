@@ -60,7 +60,7 @@
             </div>
 
             <div class="row">
-                <ul class="list-inline" style="font-size:2em;">
+                <ul class="list-inline" style="font-size:1.4em;">
                     <li>
                         <a href="http://www.recursethreads.com"><i class="fa fa-globe fa-fw fa-3x" style="color:black !important"></i></a>
                     </li>
@@ -73,11 +73,39 @@
                 </ul>
             </div>
 
+            <div class="row" style="margin-top:15px;">
+                <a style="font-size:1.5em;" data-toggle="modal" data-target="#changeLog">Change Log</a>
+            </div>
+
 
         </div>
     </div>
 
+<div id="changeLog" class="modal fade" role="dialog">
+  <div class="modal-dialog">
 
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Change Log</h4>
+      </div>
+      <div class="modal-body">
+        <h3>6/5/2017</h3>
+        <ul>
+            <li>Added bigflips</li>
+            <li>Added bigspins</li>
+            <li>Added biggerflips</li>
+            <li>Added biggerspins</li>
+        </ul>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 
 
@@ -166,6 +194,14 @@
                 } 
             }
 
+            function checkBiggerFlip(){
+                if (self.direction() == "bs" && self.rotation() == "180" && self.flipTrick() == "360 flip"){
+                    self.direction("");
+                    self.rotation("");
+                    self.flipTrick("biggerflip");
+                } 
+            }
+
             function checkBigHeelflip(){
                 if (self.direction() == "fs" && self.rotation() == "180" && self.flipTrick() == "varial heelflip"){
                     self.direction("");
@@ -197,6 +233,9 @@
                 }
                 if (self.flipTrick() == "varial heelflip"){
                     checkBigHeelflip();
+                }
+                if (self.flipTrick() == "360 flip"){
+                    checkBiggerFlip();
                 }
 
                
