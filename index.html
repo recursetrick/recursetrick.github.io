@@ -54,13 +54,13 @@
                 </h2>
 
                 <div class="row">
-                    <h1><a class="btn btn-dark btn-lg" style="font-size:1em;" data-bind="click: generate()">Roll the Dice</a></h1>
+                    <h1><a class="btn btn-dark btn-lg" style="font-size:0.8em;" data-bind="click: generate()">Roll the Dice</a></h1>
                 </div>
 
             </div>
 
             <div class="row">
-                <ul class="list-inline">
+                <ul class="list-inline" style="font-size:2em;">
                     <li>
                         <a href="http://www.recursethreads.com"><i class="fa fa-globe fa-fw fa-3x" style="color:black !important"></i></a>
                     </li>
@@ -158,6 +158,21 @@
                 }
             }
 
+            function checkBigflip(){                
+                if (self.direction() == "bs" && self.rotation() == "180" && self.flipTrick() == "varial flip"){
+                    self.direction("");
+                    self.rotation("");
+                    self.flipTrick("bigflip");
+                } 
+            }
+
+            function checkBigHeelflip(){
+                if (self.direction() == "fs" && self.rotation() == "180" && self.flipTrick() == "varial heelflip"){
+                    self.direction("");
+                    self.rotation("");
+                    self.flipTrick("big heelflip");
+                } 
+            }
 
 
             self.generate = function () {
@@ -176,6 +191,12 @@
                 if (self.flipTrick() == "shuvit") {                    
                     self.flipTrick(getShuvit());
                     checkBigspin();
+                } 
+                if (self.flipTrick() == "varial flip"){
+                    checkBigflip();
+                }
+                if (self.flipTrick() == "varial heelflip"){
+                    checkBigHeelflip();
                 }
 
                
