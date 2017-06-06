@@ -38,11 +38,11 @@
             <a href="www.recursethreads.com">
                 <h1><img src="img/recurse-rectangle-black-small.png" style="width:50%;"></h1>
             </a>
-            <h4>Trick Generator</h4>
+            <h2>Trick Generator</h4>
             <br>
 
             <div class="row" style="margin-bottom:35px;">
-                <h2>
+                <h2 style="font-size:7em;">
                     <span data-bind="text: stance()"></span>
                     <!--ko if: showRotation()-->
                     <span data-bind="text:direction()"></span>
@@ -54,7 +54,7 @@
                 </h2>
 
                 <div class="row">
-                    <h1><a class="btn btn-dark btn-lg" data-bind="click: generate()">Roll the Dice</a></h1>
+                    <h1><a class="btn btn-dark btn-lg" style="font-size:1em;" data-bind="click: generate()">Roll the Dice</a></h1>
                 </div>
 
             </div>
@@ -91,24 +91,79 @@
 
     <!-- Custom Theme JavaScript -->
     <script>
-        var fliptricks = ["heelfip", "kickflip", "varial flip", "varial heelflip", "hardflip", "inward heelflip", "360 flip"];
+        var fliptricks = ["heelfip", "kickflip", "varial flip", "varial heelflip", "hardflip", "inward heelflip", "360 flip", "shuvit"];
         var stance = ["regular", "switch", "nollie", "fakie"];
         var rotation = [null, null, null, null, null, null, 180, 180, 180, 180, 360];
         var direction = ["fs", "bs"];
+        var shuvitRotations = ["180", "180", "180", "360"];
+
+        function getFlipTrick() {
+            return fliptricks[Math.floor(Math.random() * fliptricks.length)];
+        }
+
+        function getStance() {
+            return stance[Math.floor(Math.random() * stance.length)];
+        }
+
+        function getDirection() {
+            return direction[Math.floor(Math.random() * direction.length)];
+        }
+
+        function getRotation() {
+            return rotation[Math.floor(Math.random() * rotation.length)];
+        }
+
+        function getShuvitRotation() {
+            return shuvitRotations[Math.floor(Math.random() * shuvitRotations.length)];
+        }
+
+        function getShuvit() {
+            var shuvitRotation = getShuvitRotation();
+            var shuvitDirection = getDirection();
+            return shuvitDirection + " " + shuvitRotation + " shuvit";
+        }
+
 
         function AppViewModel() {
             var self = this;
-            self.stance = ko.observable(stance[Math.floor(Math.random() * stance.length)]);
-            self.rotation = ko.observable(rotation[Math.floor(Math.random() * rotation.length)]);
-            self.direction = ko.observable(direction[Math.floor(Math.random() * direction.length)]);
-            self.flipTrick = ko.observable(fliptricks[Math.floor(Math.random() * fliptricks.length)]);
+            self.stance = ko.observable(getStance());
+            self.rotation = ko.observable(getRotation());
+            self.direction = ko.observable(getDirection());
+            self.flipTrick = ko.observable(getFlipTrick());
             self.showRotation = ko.observable(self.rotation != null);
+
+            function checkBigspin(){
+                 if (self.rotation() == "180" && self.flipTrick() == "fs 180 shuvit"){
+                    self.flipTrick("fs bigspin");
+                    self.rotation("");
+                    self.direction("");
+                }
+
+                if (self.rotation() == "180" && self.flipTrick() == "bs 180 shuvit"){
+                    self.flipTrick("bs bigspin");
+                    self.rotation("");
+                    self.direction("");
+                }
+
+                 if (self.rotation() == "180" && self.flipTrick() == "fs 360 shuvit"){
+                    self.flipTrick("fs biggerspin");
+                    self.rotation("");
+                    self.direction("");
+                }
+
+                if (self.rotation() == "180" && self.flipTrick() == "bs 360 shuvit"){
+                    self.flipTrick("bs biggerspin");
+                    self.rotation("");
+                    self.direction("");
+                }
+            }
+
 
 
             self.generate = function () {
 
-                self.stance(stance[Math.floor(Math.random() * stance.length)]);
-                self.rotation(rotation[Math.floor(Math.random() * rotation.length)]);
+                self.stance(getStance());
+                self.rotation(getRotation());
 
                 if (self.rotation() == null) {
                     self.showRotation(false);
@@ -116,8 +171,14 @@
                     self.showRotation(true);
                 }
 
-                self.direction(direction[Math.floor(Math.random() * direction.length)]);
-                self.flipTrick(fliptricks[Math.floor(Math.random() * fliptricks.length)]);
+                self.direction(getDirection());
+                self.flipTrick(getFlipTrick());
+                if (self.flipTrick() == "shuvit") {                    
+                    self.flipTrick(getShuvit());
+                    checkBigspin();
+                }
+
+               
 
             }
         }
@@ -127,16 +188,15 @@
     </script>
 
     <script>
-        (function (i, s, o, g, r, a, m) {        
-i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
-            (i[r].q = i[r].q || []).push(arguments)        
-}, i[r].l = 1 * new Date(); a = s.createElement(o),
-            m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
         })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
         ga('create', 'UA-100335234-1', 'auto');
         ga('send', 'pageview');
-
     </script>
 
 </body>
